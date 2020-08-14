@@ -1,0 +1,99 @@
+<cart-directive areaid="model.area.id" rest-offers="model.promotions" open-choice-popup="open(item, fromcart, promo);"
+                rest-type="restType" restaurant="model.restaurant" class="ng-isolate-scope">
+    <div class="cart-section">
+        <div class="cart-loading"><span><i class="fa fa-spin fa-circle-o-notch orange fa-3x"></i></span></div>
+        <div class="cart-head orange-bg p-a"><span class="f-20">Your Cart</span>
+            <!--<button type="button" class='btn btn-sm pull-right'>Clear</button>--></div>
+        <!-- ngIf: !$root.cartmodel.restaurants[0] && restOffers.length -->
+        <!-- ngIf: !$root.cartmodel.restaurants[0] -->
+        <section class="cart-available-section"><!-- ngIf: $root.cartmodel.restaurants[0] -->
+            <section ng-if="$root.cartmodel.restaurants[0]" class="ng-scope" style="">
+                <div class="rest-name p-a b-b f-16"><b><a href="/egypt/restaurant/505360/the-burger--el-rehab-city"
+                                                          class="ng-binding">The Burger</a>
+                    <!-- ngIf: $root.cartmodel.areaId != areaid --></b></div>
+                <!-- ngIf: $root.cartmodel.restaurants[0].promotions.length && $root.cartmodel.restaurants[0].coupons.length -->
+            </section><!-- end ngIf: $root.cartmodel.restaurants[0] -->
+            <!-- ngIf: $root.cartmodel.restaurants[0] && $root.cartmodel.restaurants[0].coupons.length -->
+            <!-- ngIf: $root.cartmodel.restaurants[0] && $root.cartmodel.restaurants[0].promotions.length -->
+            <!-- ngIf: $root.cartmodel.restaurants[0] -->
+            <section class="cartItems p-a ng-scope" ng-if="$root.cartmodel.restaurants[0]" style="">
+                <table class="table table-condensed m-b-0">
+                    <tbody><!-- ngRepeat: item in $root.cartmodel.restaurants[0].items track by item.refID -->
+                    <tr class="p-y-md f-12 cart-item ng-scope"
+                        ng-repeat="item in $root.cartmodel.restaurants[0].items track by item.refID">
+                        <td class="p-l-0" ng-class="{'text-center' : item.isFreeItem}"><!-- ngIf: !item.isFreeItem -->
+                            <section class="qty-update-section incart b-a ng-scope" ng-if="!item.isFreeItem">
+                                <button type="button" class="btn btn-sm b-r" ng-click="updateqty(item,'minus')"><i
+                                        class="fa fa-minus orange"></i></button>
+                                <span class="f-11"><b class="ng-binding">1</b></span>
+                                <button type="button" class="btn btn-sm b-l" ng-click="updateqty(item,'plus')"><i
+                                        class="fa fa-plus orange"></i></button>
+                            </section><!-- end ngIf: !item.isFreeItem --><!-- ngIf: item.isFreeItem --></td>
+                        <td class="p-x-0 cart-item-nm"><!-- use this when you want to be able to open choices popup -->
+                            <!--<b ng-click="openChoicePopup({'item': item, 'fromcart': true})">{{item.name}}</b>--><b
+                                    class="ng-binding">French Fries &nbsp;<i class="fa fa-info-circle hidden-xs ng-hide"
+                                                                             uib-tooltip=""
+                                                                             ng-show="item.itemChoiceString"></i></b>
+                        </td><!-- ngIf: item.isFreeItem --><!-- ngIf: !item.isFreeItem -->
+                        <td class="p-r-0 text-center price-td ng-scope" ng-if="!item.isFreeItem"><label
+                                class="text-center ng-binding">18.00</label><label ng-click="removeItem(item)"
+                                                                                   class="p-l-5 m-b-0 pull-right del-item"><i
+                                class="fa fa-minus-circle"></i></label></td><!-- end ngIf: !item.isFreeItem --></tr>
+                    <!-- end ngRepeat: item in $root.cartmodel.restaurants[0].items track by item.refID -->
+                    <!--<tr ng-repeat-end ng-if="item.itemChoiceString"><td colspan="3" class="f-11 p-a-0">{{item.itemChoiceString}}</td></tr>-->
+                    <!--<tr class='p-y-md'><td class='p-l-0 p-y'><section class='qty-update-section b-a'><button type="button" class="btn btn-sm b-r"><i class='fa fa-minus'></i></button><input type="text" value='6'><button type="button" class="btn btn-sm b-l"><i class='fa fa-plus'></i></button></section></td><td class='p-x-0 p-y'><b>Subway burger meal</b><p class='f-11 m-b-0'>Hot chips, Italian bread, Corn, soup, white chocalate</p></td><td class='p-r-0 text-right price-td p-y'>3.000<span><i class='fa fa-close'></i></span></td></tr><tr class='p-y-md'><td class='p-l-0 p-y'><section class='qty-update-section b-a'><button type="button" class="btn btn-sm b-r"><i class='fa fa-minus'></i></button><input type="text" value='64'><button type="button" class="btn btn-sm b-l"><i class='fa fa-plus'></i></button></section></td><td class='p-x-0 p-y'><b>Veg. Sandwiches</b><p class='f-11 m-b-0'>Hot chips, Italian bread, Corn, soup, white chocalate</p></td><td class='p-r-0 text-right price-td p-y'>83.000<span><i class='fa fa-close'></i></span></td></tr>-->
+                    </tbody>
+                </table>
+                <hr class="m-a-0 m-t b-b b-t-0">
+            </section><!-- end ngIf: $root.cartmodel.restaurants[0] --><!-- ngIf: showUpsell -->
+            <!-- ngIf: $root.cartmodel.restaurants[0] -->
+            <section class="total-section p-a b-radius  ng-scope"
+                     ng-class="{'has-extra':$root.cartmodel.restaurants[0].isSub &amp;&amp; global.isSubscribed &amp;&amp; !global.reachedSubscriptionLimit}"
+                     ng-if="$root.cartmodel.restaurants[0]" style="">
+                <table class="table table-condensed">
+                    <tbody>
+                    <tr class="text-75 f-14">
+                        <td>Subtotal</td>
+                        <td class="text-right price ng-binding">EGP 18.00</td>
+                    </tr><!-- ngIf: $root.cartmodel.gemDiscount --><!-- ngIf: $root.cartmodel.totalCouponDiscount -->
+                    <tr class="text-75 f-14" ng-class="{'red-text' : $root.cartmodel.oldDeliveryCharges >0}">
+                        <td><b ng-show="$root.cartmodel.restaurants[0].alt_Del" class="ng-binding ng-hide"></b><span
+                                ng-hide="$root.cartmodel.restaurants[0].alt_Del">Delivery Fee</span></td>
+                        <td class="text-right price relative" ng-class="{'omanify' : country.id == 5}"><span
+                                class="tgo-del ng-binding ng-hide"
+                                ng-class="{'alignr' : !$root.cartmodel.deliveryCharges}"
+                                ng-show="$root.cartmodel.oldDeliveryCharges >0">EGP 0.00</span><span
+                                ng-show="$root.cartmodel.deliveryCharges" class="ng-binding">EGP 12.00</span><span
+                                ng-hide="$root.cartmodel.deliveryCharges" class="ng-hide"><span
+                                ng-show="$root.cartmodel.restaurants[0].isSub &amp;&amp; global.isSubscribed &amp;&amp; !global.reachedSubscriptionLimit"
+                                class="ng-binding ng-hide">EGP 0.00</span><span
+                                ng-hide="$root.cartmodel.restaurants[0].isSub &amp;&amp; global.isSubscribed &amp;&amp; !global.reachedSubscriptionLimit">Free</span></span>
+                        </td>
+                    </tr>
+                    <!-- ngIf: $root.cartmodel.restaurants[0].isSub && global.isSubscribed && !global.reachedSubscriptionLimit -->
+                    <!-- ngIf: $root.cartmodel.restaurants[0].isSub && global.isSubscribed && !global.reachedSubscriptionLimit -->
+                    <!-- ngIf: $root.cartmodel.chargesFor6alabat --><!-- ngIf: $root.cartmodel.muncipalityCharges -->
+                    <tr ng-if="$root.cartmodel.muncipalityCharges" class="f-14 ng-scope">
+                        <td><span ng-show="$root.cartmodel.restaurants[0].alt_Mun" class="ng-binding">VAT</span><span
+                                ng-hide="$root.cartmodel.restaurants[0].alt_Mun" class="ng-hide">Municipality Tax</span>
+                        </td>
+                        <td class="text-right price"><b class="ng-binding">EGP 4.20</b></td>
+                    </tr><!-- end ngIf: $root.cartmodel.muncipalityCharges -->
+                    <!-- ngIf: $root.cartmodel.touristCharges -->
+                    <tr>
+                        <td style="padding-top:20px;"><b class="f-14">Total Amount</b></td>
+                        <td class="text-right price" style="padding-top:20px;"><b class="f-14 ng-binding">EGP 34.20</b>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table><!-- ngIf: ismobile --><!-- ngIf: !ismobile -->
+                <div ng-if="!ismobile" class="ng-scope">
+                    <!-- ngIf: $root.cartmodel.total >= $root.cartmodel.restaurants[0].minOrderAmount -->
+                    <button type="button" class="btn btn-block b-radius-3 green f-14 text-uppercase m-b-5 ng-scope"
+                            ng-if="$root.cartmodel.total >= $root.cartmodel.restaurants[0].minOrderAmount"
+                            ng-click="gotoCheckout($event, true);">Proceed to Checkout
+                    </button><!-- end ngIf: $root.cartmodel.total >= $root.cartmodel.restaurants[0].minOrderAmount -->
+                    <!-- ngIf: $root.cartmodel.total< $root.cartmodel.restaurants[0].minOrderAmount --></div>
+                <!-- end ngIf: !ismobile --></section><!-- end ngIf: $root.cartmodel.restaurants[0] --></section>
+        <!-- ngIf: gemData.isGemAcc --></div>
+</cart-directive>
